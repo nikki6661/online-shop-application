@@ -23,26 +23,19 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception  {
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests()
-                .antMatchers("/products/").permitAll()
-                .antMatchers("/products/create").hasRole("ADMIN")
-                .antMatchers("products/update/*").hasRole("ADMIN")
-                .antMatchers("products/delete/*").hasRole("ADMIN")
-                .anyRequest().authenticated();
-
+                .and().authorizeHttpRequests(auth ->auth.antMatchers("/products/").permitAll()
+                        .antMatchers("/products/create").hasRole("ADMIN")
+                        .antMatchers("products/update/*").authenticated()
+                        .antMatchers("products/delete/*").hasRole("ADMIN"))
+                .httpBasic();
         return http.build();
     }
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean
     public InMemoryUserDetailsManager userDetailsService()  {
-        PasswordEncoder bCryptPasswordEncoder = encoder();
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("nikitha")
-                .password(bCryptPasswordEncoder.encode("password"))
-                        .roles("ADMIN")
+        manager.createUser(User.withDefaultPasswordEncoder().username("nikitha")
+                .password("password")
+                .roles("ADMIN")
                 .build());
         return manager;
 
