@@ -16,6 +16,7 @@ public class OpenApiConfig {
                         .title("Online E-Commerce Site")
                         .version("1.0.0")
                         .description("To View and Buy different products from the site"))
+
                 .components(new Components());
 
     }
