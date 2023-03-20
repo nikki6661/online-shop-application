@@ -11,3 +11,8 @@
 # Rest API : web client references 
 
 1. https://www.youtube.com/watch?v=F3uJyeAyv5g
+
+# HashiCorp Vault Config : 
+
+1. https://spring.io/guides/gs/vault-config/
+2. https://cloud.spring.io/spring-cloud-vault/reference/html/
