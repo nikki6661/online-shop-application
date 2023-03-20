@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +34,7 @@ public class ProductController {
 
     @PostMapping("/create")
     @Operation(description = "To create a product " , summary = "Create a product by sending POST request to /products/create endpoint with the product details in the request body")
-    public ProductResponseEntityDto createProduct(@RequestBody ProductRequestEntityDto product) {
+    public ProductResponseEntityDto createProduct( @Valid @RequestBody ProductRequestEntityDto product) {
        product productEntity = modelMapper.map(product,product.class) ;
         product response = service.createProduct(productEntity) ;
         return modelMapper.map(response,ProductResponseEntityDto.class)  ;

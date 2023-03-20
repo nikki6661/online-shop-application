@@ -5,6 +5,7 @@ import com.onlineshop.model.ProductInformationDto;
 import com.onlineshop.model.product;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 import java.util.List;
@@ -17,8 +18,10 @@ import java.util.List;
 
 public class ProductRequestEntityDto implements Serializable {
 
+    @NotNull(message = "Name is Mandatory")
     private String name ;
     private String description ;
+    @NotNull(message = "Price is Mandatory")
     private Long price ;
     private List<ProductInformationDto> productInformation;
     private Integer availabilityStock;
