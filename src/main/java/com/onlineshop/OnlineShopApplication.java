@@ -14,13 +14,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @EnableConfigurationProperties(vaultConfig.class)
-public class OnlineShopApplication implements CommandLineRunner {
+public class OnlineShopApplication  {
 	private final vaultConfig vaultConfig;
 	public OnlineShopApplication(com.onlineshop.config.vaultConfig vaultConfig) {
 		this.vaultConfig = vaultConfig;
 	}
-	@Value("${spring.data.mongodb.password}")
-	private String dbPass;
 
 	public static void main(String[] args) {
 
@@ -31,14 +29,5 @@ public class OnlineShopApplication implements CommandLineRunner {
 		return WebClient.builder();
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		Logger logger = LoggerFactory.getLogger(vaultConfig.class);
 
-		logger.info("----------------------------------------");
-		logger.info("Configuration properties");
-		logger.info("  Username", vaultConfig.getUsername());
-		logger.info("   password", dbPass);
-		logger.info("----------------------------------------");
-	}
 }
